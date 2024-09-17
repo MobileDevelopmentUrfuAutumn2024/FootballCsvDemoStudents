@@ -1,5 +1,5 @@
 import jfree.JFree
-import model.GoalKeeperFromTransferCost
+import model.ForwardFromTransferCost
 import model.Player
 import model.Team
 import parser.CsvParser
@@ -23,6 +23,6 @@ fun main(args: Array<String>) {
     println("Русское название позиции самого дорогого немецкого игрока: $nameGermanyPlayer")
     println("Команда с наибольшим числом удалений на одного игрока: $countDeleteForOnePlayer")
 
-    val listData: List<GoalKeeperFromTransferCost> = resolver.getGoalKeeperFromTransferCost()
+    val listData: List<ForwardFromTransferCost> = resolver.getForwardFromTransferCost()
     JFree.draw(listData)
 }

@@ -1,5 +1,5 @@
 import junit.framework.TestCase.assertEquals
-import model.GoalKeeperFromTransferCost
+import model.ForwardFromTransferCost
 import model.Player
 import model.Position
 import model.Team
@@ -51,38 +51,38 @@ class ResolverTest {
 
     @Test
     fun testGetCountWithoutAgency() {
-        Mockito.`when`(resolver.getCountWithoutAgency(listPlayers)).thenReturn(1)
-        assertEquals(1, resolver.getCountWithoutAgency(listPlayers))
+        Mockito.`when`(resolver.getCountWithoutAgency()).thenReturn(1)
+        assertEquals(1, resolver.getCountWithoutAgency())
     }
 
     @Test
     fun testGetBestScorerDefender() {
-        Mockito.`when`(resolver.getBestScorerDefender(listPlayers)).thenReturn(Pair("Name2", 1))
-        assertEquals(Pair("Name2", 1), resolver.getBestScorerDefender(listPlayers))
+        Mockito.`when`(resolver.getBestScorerDefender()).thenReturn(Pair("Name2", 1))
+        assertEquals(Pair("Name2", 1), resolver.getBestScorerDefender())
     }
 
     @Test
     fun testGetTheExpensiveGermanPlayerPosition() {
-        Mockito.`when`(resolver.getTheExpensiveGermanPlayerPosition(listPlayers))
+        Mockito.`when`(resolver.getTheExpensiveGermanPlayerPosition())
             .thenReturn("GOALKEEPER")
-        assertEquals("GOALKEEPER", resolver.getTheExpensiveGermanPlayerPosition(listPlayers))
+        assertEquals("GOALKEEPER", resolver.getTheExpensiveGermanPlayerPosition())
     }
 
     @Test
     fun testGetTheRudestTeam() {
         val rudeTeam = Team("Team1", "")
-        Mockito.`when`(resolver.getTheRudestTeam(listPlayers)).thenReturn(rudeTeam)
-        assertEquals(rudeTeam, resolver.getTheRudestTeam(listPlayers))
+        Mockito.`when`(resolver.getTheRudestTeam()).thenReturn(rudeTeam)
+        assertEquals(rudeTeam, resolver.getTheRudestTeam())
     }
 
     @Test
     fun testGetGoalKeeperFromTransferCost() {
         val goalKeeperList = listOf(
-            GoalKeeperFromTransferCost(100000, 10),
-            GoalKeeperFromTransferCost(10000, 10)
+            ForwardFromTransferCost(100000, 10),
+            ForwardFromTransferCost(10000, 10)
         )
-        Mockito.`when`(resolver.getGoalKeeperFromTransferCost(listPlayers))
+        Mockito.`when`(resolver.getForwardFromTransferCost())
             .thenReturn(goalKeeperList)
-        assertEquals(goalKeeperList, resolver.getGoalKeeperFromTransferCost(listPlayers))
+        assertEquals(goalKeeperList, resolver.getForwardFromTransferCost())
     }
 }

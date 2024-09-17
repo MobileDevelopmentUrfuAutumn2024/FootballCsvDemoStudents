@@ -1,6 +1,6 @@
 package jfree
 
-import model.GoalKeeperFromTransferCost
+import model.ForwardFromTransferCost
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
 import org.jfree.chart.JFreeChart
@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities
 
 object JFree {
 
-    fun draw(listData: List<GoalKeeperFromTransferCost>) {
+    fun draw(listData: List<ForwardFromTransferCost>) {
         SwingUtilities.invokeLater {
             val frame = JFrame("Сажин_Е_А")
             frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
@@ -27,13 +27,13 @@ object JFree {
         }
     }
 
-    private fun createChartPanel(listData: List<GoalKeeperFromTransferCost>): ChartPanel {
+    private fun createChartPanel(listData: List<ForwardFromTransferCost>): ChartPanel {
         val dataset = createDataset(listData)
         val chart = createChart(dataset)
         return ChartPanel(chart)
     }
 
-    private fun createDataset(listData: List<GoalKeeperFromTransferCost>): XYDataset {
+    private fun createDataset(listData: List<ForwardFromTransferCost>): XYDataset {
 
         val series = XYSeries("Goals vs Transfer Value")
 

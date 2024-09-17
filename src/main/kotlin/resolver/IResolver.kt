@@ -1,6 +1,6 @@
 package resolver
 
-import model.GoalKeeperFromTransferCost
+import model.ForwardFromTransferCost
 import model.Team
 
 interface IResolver {
@@ -19,5 +19,5 @@ interface IResolver {
 
     /* Выберите список футболистов для демонстрации */
     /* зависимости количества забитых голов от трансферной стоимости для нападающих */
-    fun getGoalKeeperFromTransferCost(): List<GoalKeeperFromTransferCost>
+    fun getForwardFromTransferCost(): List<ForwardFromTransferCost>
 }
