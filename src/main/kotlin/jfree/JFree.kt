@@ -65,5 +65,3 @@ object JFree {
         return chart
     }
 }
-
-data class PlayerData(val transferValue: Double, val goalsScored: Double)
