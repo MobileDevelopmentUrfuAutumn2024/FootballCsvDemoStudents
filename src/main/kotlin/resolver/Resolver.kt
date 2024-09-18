@@ -26,12 +26,10 @@ class Resolver(val listPlayers: List<Player>) : IResolver {
      */
     override fun getBestScorerDefender(): Pair<String, Int> {
 
-        val player: Player =
-            listPlayers.filter { player: Player -> player.position == Position.DEFENDER }
-                .maxByOrNull { player: Player -> player.goalsCount }
-                ?: throw IllegalArgumentException("Not found player")
-
-        return Pair(player.name, player.goalsCount)
+        return listPlayers.filter { player: Player -> player.position == Position.DEFENDER }
+            .maxByOrNull { player: Player -> player.goalsCount }
+            ?.let { it.name to it.goalsCount }
+            ?: throw IllegalArgumentException("Not found player")
     }
 
     /**
@@ -43,8 +41,7 @@ class Resolver(val listPlayers: List<Player>) : IResolver {
             .maxByOrNull { player: Player -> player.transferCost }?.position?.name
             ?: throw IllegalArgumentException("Not found player")
 
-
-        return translate(maxCountPlayer)
+        return Position.translate(maxCountPlayer)
     }
 
     /**
@@ -73,16 +70,5 @@ class Resolver(val listPlayers: List<Player>) : IResolver {
                     goalsCount = it.goalsCount
                 )
             }
-    }
-
-    private fun translate(maxCountPlayer: String): String {
-
-        return when (maxCountPlayer) {
-            Position.MIDFIELD.name -> "Полузащитник"
-            Position.DEFENDER.name -> "Защитник"
-            Position.FORWARD.name -> "Нападающий"
-            Position.GOALKEEPER.name -> "Вратарь"
-            else -> "Not Found"
-        }
     }
 }
