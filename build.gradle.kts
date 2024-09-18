@@ -13,6 +13,10 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.jfree:jfreechart:1.5.0")
+    testImplementation("org.mockito:mockito-core:2.1.0")
+
+
 }
 
 tasks.test {
