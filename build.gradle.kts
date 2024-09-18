@@ -11,8 +11,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-    implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.jfree:jfreechart:1.5.3")
+    implementation ("org.jfree:jfreesvg:3.3")
 }
 
 tasks.test {
