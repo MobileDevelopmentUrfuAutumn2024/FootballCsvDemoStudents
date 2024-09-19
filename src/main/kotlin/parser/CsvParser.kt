@@ -6,7 +6,7 @@ import model.Team
 import java.io.File
 
 object CsvParser{
-    private var playerList: MutableList<Player> = mutableListOf()
+    private val playerList: MutableList<Player> = mutableListOf()
 
     fun parser(): MutableList<Player>{
         val xmlFile = File("src/main/resources/fakePlayers.csv").readText().split("\r")
