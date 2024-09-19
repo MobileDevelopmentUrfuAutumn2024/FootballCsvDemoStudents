@@ -5,5 +5,6 @@ fun main(args: Array<String>) {
     print(l.getCountWithoutAgency())
     println("${l.getBestScorerDefender().toList()[0]}: ${l.getBestScorerDefender().toList()[1]}")
     println(l.getTheExpensiveGermanPlayerPosition())
-    println(l.getTheRudestTeam().name)
+    val grudge = l.getTheRudestTeam()
+    println(grudge.redCardsNum/grudge.playersCount)
 }

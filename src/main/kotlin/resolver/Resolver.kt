@@ -26,7 +26,8 @@ class Resolver : IResolver{
     override fun getTheRudestTeam(): Team {
         for(player in dataList){
             player.team.redCardsNum += player.redCards
+            player.team.playersCount += 1
         }
-        return dataList.sortedBy { it.team.redCardsNum }.first().team
+        return dataList.sortedBy{ it.team.redCardsNum }.last().team
     }
 }
