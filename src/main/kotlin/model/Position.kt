@@ -5,5 +5,5 @@ enum class Position {
     DEFENDER,
     FORWARD,
     GOALKEEPER,
-    Other
+    Other;
 }

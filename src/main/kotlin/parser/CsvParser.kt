@@ -1,6 +1,5 @@
 package parser
 
-import com.sun.jdi.Value
 import model.Player
 import model.Position
 import model.Team
@@ -9,28 +8,23 @@ import java.io.File
 object CsvParser{
     private var playerList: MutableList<Player> = mutableListOf()
 
-    fun parser(){
-        val xmlFile = File("src/main/resources/fakePlayers.csv").readText().split("\n")
+    fun parser(): MutableList<Player>{
+        val xmlFile = File("src/main/resources/fakePlayers.csv").readText().split("\r")
         playerListCreate(xmlFile)
-        print(playerList[0])
+        return playerList
     }
 
     private fun playerListCreate(list: List<String>){
-        for(i in 1..list.size){
+        for(i in 1..<list.size-1){
             this.playerList.add(playerConstrctor(list[i]))
         }
     }
 
-    private fun playerConstrctor(string: String): Player{
+    private fun playerConstrctor(string: String) : Player {
         val data = string.split(";")
-        var position: Position
         val team = Team(data[1], data[2])
-        try {
-            position = Position.valueOf(data[3])
-        }
-        finally {
-            position = Position.Other
-        }
+        val position = Position.entries.find { it.name == data[3] }
+            ?: Position.Other
         return Player(
             data[0],
             team,
