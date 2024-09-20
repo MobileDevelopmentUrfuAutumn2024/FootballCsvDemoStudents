@@ -5,10 +5,12 @@ import ui.ShareOfPlayersByCountryFrame
 
 fun main() {
     val players = CsvParser.parse("src/main/resources/fakePlayers.csv")
-    println(Resolver.getCountWithoutAgency(players))
-    println(Resolver.getBestScorerDefender(players))
-    println(Resolver.getTheExpensiveGermanPlayerPosition(players))
-    println(Resolver.getTheRudestTeam(players))
+    players.take(5).forEach { println(it) }
+    val resolver = Resolver(players)
+    println(resolver.getCountWithoutAgency())
+    println(resolver.getBestScorerDefender())
+    println(resolver.getTheExpensiveGermanPlayerPosition())
+    println(resolver.getTheRudestTeam())
 
     ShareOfPlayersByCountryFrame.show(players)
 }

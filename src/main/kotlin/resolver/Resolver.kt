@@ -1,36 +1,29 @@
 package resolver
 
 import model.Player
+import model.Position
 import model.Team
 
-object Resolver: IResolver{
+class Resolver(private val players: List<Player>): IResolver{
 
-    private val positionsEnglishToRussian = mapOf(
-        "MIDFIELD" to "Полузащитник",
-        "DEFENDER" to "Защитник",
-        "GOALKEEPER" to "Вратарь",
-        "FORWARD" to "Нападающий"
-    )
-
-    override fun getCountWithoutAgency(players: List<Player>): Int {
+    override fun getCountWithoutAgency(): Int {
         return players.count { it.agency.isEmpty() }
     }
 
-    override fun getBestScorerDefender(players: List<Player>): Pair<String, Int> {
-        return players.filter { it.position == "DEFENDER" }
-            .maxBy { it.goals }
-            .let { it.name to it.goals }
+    override fun getBestScorerDefender(): Pair<String, Int> {
+        return players.filter { it.position == Position.DEFENDER }
+            .maxBy { it.goals ?: 0 }
+            .let { it.name to (it.goals ?: 0) }
     }
 
-    override fun getTheExpensiveGermanPlayerPosition(players: List<Player>): String {
+    override fun getTheExpensiveGermanPlayerPosition(): String {
         return players.filter { it.nationality == "Germany" }
-            .maxBy { it.transferCost }
-            .let { positionsEnglishToRussian.getOrDefault(it.position.capitalize(), it.position) }
+        .maxBy { it.transferCost ?: 0 }.position?.name ?: ""
     }
 
-    override fun getTheRudestTeam(players: List<Player>): Team {
+    override fun getTheRudestTeam(): Team {
         return players.groupBy { it.team }
-        .map { it -> it.key to it.value.sumOf { it.redCards } / it.value.count() }
+        .map { (team, players) -> team to players.sumOf { it.redCards ?: 0 } / players.count() }
         .maxBy { it.second }.first
     }
 
