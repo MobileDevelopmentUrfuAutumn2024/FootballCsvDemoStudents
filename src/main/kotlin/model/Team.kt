@@ -1,3 +1,15 @@
 package model
 
-class Team
+/**
+ * Команда
+ */
+data class Team (
+    /**
+     * Название
+     */
+    var name: String,
+    /**
+     * Город
+     */
+    var city: String
+)

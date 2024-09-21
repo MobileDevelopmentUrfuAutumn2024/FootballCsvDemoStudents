@@ -15,4 +15,8 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
+
+    // Получить долю игроков из разных стран.
+    fun getSharePlayersDifferentCountries(): Map<String, Double>
+
 }
