@@ -1,6 +1,7 @@
 package resolver
 
 import model.Team
+import org.jfree.data.general.DefaultPieDataset
 
 interface IResolver {
 
@@ -15,4 +16,8 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
+
+    // Какую долю занимают игроки каждой из позиций.
+    fun getProportionOfPlayersInEachPosition(): DefaultPieDataset<String>
+
 }
