@@ -11,5 +11,6 @@ fun main() {
     println("Русское название позиции самого дорогого немецкого игрока: ${resolver.getTheExpensiveGermanPlayerPosition()}")
     println("Команда с наибольшим числом удалений на одного игрока: ${resolver.getTheRudestTeam()}")
 
-    GraphImpl(players).drawGraph()
+    val graphData = resolver.getForwardFromTransferCost()
+    GraphImpl().draw(graphData)
 }

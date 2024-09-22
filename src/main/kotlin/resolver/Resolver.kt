@@ -1,5 +1,6 @@
 package resolver
 
+import model.ForwardFromTransferCost
 import model.Team
 
 interface Resolver {
@@ -12,4 +13,6 @@ interface Resolver {
     fun getTheExpensiveGermanPlayerPosition(): String
 
     fun getTheRudestTeam(): Team
+
+    fun getForwardFromTransferCost(): List<ForwardFromTransferCost>
 }

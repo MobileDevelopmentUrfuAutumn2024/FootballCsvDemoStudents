@@ -1,9 +1,9 @@
 package resolver
 
+import model.ForwardFromTransferCost
 import model.Player
 import model.Position
 import model.Team
-import parser.CsvParser
 
 class ResolverImpl(private val players: List<Player>) : Resolver {
 
@@ -46,5 +46,15 @@ class ResolverImpl(private val players: List<Player>) : Resolver {
         }?.key ?: throw NoSuchElementException("Команды не найдены")
 
         return rudestTeam
+    }
+
+    override fun getForwardFromTransferCost(): List<ForwardFromTransferCost> {
+        return players.filter { it.position == Position.FORWARD }
+            .map {
+                ForwardFromTransferCost(
+                    transferCost = it.transferCost,
+                    goalsCount = it.goals
+                )
+            }
     }
 }
