@@ -15,4 +15,6 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
+
+    fun getDependenceOfGoalsOnCoastForForwards()
 }
