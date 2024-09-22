@@ -33,10 +33,12 @@ class Resolver : IResolver{
     }
 
     fun topTransferPrice(): List<Team>{
+        val teamList: MutableMap<String, Team> = mutableMapOf()
         for(player in dataList){
-            player.team.transferCost += player.transferCost.toInt()
-            if (!teamList.contains(player.team)) teamList.add(player.team)
+            val name = player.team.name
+            val cost = teamList[name] ?:Team(name, player.team.city)
+            teamList[name] = Team(name = name, city = cost.city, transferCost = player.transferCost.toInt() + cost.transferCost)
         }
-        return teamList.sortedBy { it.transferCost }.asReversed().take(10)
+        return teamList.values.sortedBy { it.transferCost }.asReversed().take(10)
     }
 }
