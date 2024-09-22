@@ -12,20 +12,17 @@ class Resolver(private val players: List<Player>) : IResolver {
     }
 
     override fun getBestScorerDefender(): Pair<String, Int> {
-        val bestScorerDefender: Player = players
+        return players
             .filter { it.position == Player.Position.DEFENDER }
-            .maxByOrNull { it.goalsCount } ?: throw NotFoundException("Best scorer defender not found")
-
-        return bestScorerDefender
-            .let { Pair(it.name, it.goalsCount) }
+            .maxByOrNull { it.goalsCount }
+            ?.let { it.name to it.goalsCount } ?: throw NotFoundException("Best scorer defender not found")
     }
 
     override fun getTheExpensiveGermanPlayerPosition(): String {
-        val expensiveGermanPlayer: Player = players
+        return players
             .filter { it.nationality == "Germany" }
-            .maxByOrNull { it.transferCost } ?: throw NotFoundException("Expensive german player not found")
-
-        return expensiveGermanPlayer.position.russianName
+            .maxByOrNull { it.transferCost }
+            ?.position?.russianName ?: throw NotFoundException("Expensive german player not found")
     }
 
     override fun getTheRudestTeam(): Team {

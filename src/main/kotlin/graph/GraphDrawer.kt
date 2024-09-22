@@ -5,27 +5,29 @@ import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.ui.ApplicationFrame
-import org.jfree.data.general.DefaultPieDataset
-import org.jfree.data.general.PieDataset
+import org.jfree.data.category.CategoryDataset
+import org.jfree.data.category.DefaultCategoryDataset
 
 object GraphDrawer {
 
     fun draw(data: List<TeamTransferTotalCost>) {
         val dataset = createDataset(data)
-        val chart = createPieChart(dataset)
+        val chart = createBarChart(dataset)
         displayChart(chart)
     }
 
-    private fun createDataset(data: List<TeamTransferTotalCost>): PieDataset {
-        val dataset = DefaultPieDataset()
-        data.forEach { dataset.setValue(it.team, it.totalTransferCost) }
+    private fun createDataset(data: List<TeamTransferTotalCost>): CategoryDataset {
+        val dataset = DefaultCategoryDataset()
+        data.forEach { dataset.addValue(it.totalTransferCost, it.team, "") }
 
         return dataset
     }
 
-    private fun createPieChart(data: PieDataset): JFreeChart {
-        val chart = ChartFactory.createPieChart(
-            "Топ-${data.keys.size} команд с наивысшей суммарной трансферной стоимостью",
+    private fun createBarChart(data: CategoryDataset): JFreeChart {
+        val chart = ChartFactory.createBarChart(
+            "Топ-${data.rowCount} команд с наивысшей суммарной трансферной стоимостью",
+            "Команда",
+            "Суммарная трансферная стоимость",
             data
         )
 
