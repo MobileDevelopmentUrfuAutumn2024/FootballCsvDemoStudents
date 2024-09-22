@@ -1,6 +1,7 @@
 package resolver
 
 import model.Team
+import java.math.BigDecimal
 
 interface IResolver {
 
@@ -15,4 +16,6 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
+
+    fun getTopTeamsByTransferCost(): List<Pair<Team, Double>>
 }
