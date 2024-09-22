@@ -6,6 +6,7 @@ import parser.CsvParser
 
 class Resolver : IResolver{
     private val dataList = CsvParser.parser()
+    private var teamList: MutableList<Team> = mutableListOf()
 
     override fun getCountWithoutAgency(): Int {
         return dataList.filter{it.agency==""}.size
@@ -29,5 +30,13 @@ class Resolver : IResolver{
             player.team.playersCount += 1
         }
         return dataList.sortedBy{ it.team.redCardsNum }.last().team
+    }
+
+    fun topTransferPrice(): List<Team>{
+        for(player in dataList){
+            player.team.transferCost += player.transferCost.toInt()
+            if (!teamList.contains(player.team)) teamList.add(player.team)
+        }
+        return teamList.sortedBy { it.transferCost }.asReversed().take(10)
     }
 }
