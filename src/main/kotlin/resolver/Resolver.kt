@@ -38,4 +38,14 @@ class Resolver(private val players: List<Player>) : IResolver {
             .maxByOrNull { it.value.map { player -> player.redCards }.average() }
             ?.key ?: Team("", "")
     }
+
+    // Выведите топ-10 команд с наивысшей суммарной трансферной стоимостью с демонстрацией этих стоимостей.
+    fun getTopTenTransferCost(): List<Pair<Team, Int>> {
+        return players
+            .groupBy { it.team }
+            .mapValues { it.value.sumOf { player -> player.transferCost } }
+            .toList()
+            .sortedBy { it.second }
+            .take(10)
+    }
 }
