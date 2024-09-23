@@ -1,16 +1,5 @@
 package model
 
-class Team(private val name: String, private val city: String, private val players: List<Player>) {
+class Team(val name: String, val city: String, val players: List<Player>) {
 
-    fun getName(): String{
-        return name
-    }
-
-    fun getCity(): String{
-        return city
-    }
-
-    fun getPlayers(): List<Player>{
-        return players
-    }
 }

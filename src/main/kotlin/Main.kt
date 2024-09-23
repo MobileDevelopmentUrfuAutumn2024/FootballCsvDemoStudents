@@ -1,3 +1,4 @@
+import model.PlayerPosition
 import parser.CsvParser
 import resolver.Resolver
 import org.jetbrains.kotlinx.dataframe.api.dataFrameOf
@@ -19,15 +20,15 @@ fun main(args: Array<String>) {
     println("Количество игроков, интересы которых не представляет агенство: $countWithoutAgency")
     println("Автор наибольшего числа голов из числа защитников и их количество: ${bestScorerDefender.first} ${bestScorerDefender.second}")
     println("Русское название позиции самого дорогого немецкого игрока: $theExpensiveGermanPlayerPosition")
-    println("Команда с наибольшим числом удалений на одного игрока: ${theRudestTeam.getName()}")
+    println("Команда с наибольшим числом удалений на одного игрока: ${theRudestTeam.name}")
 
     //Additional task
     val forwards =
-        teams.flatMap { it.getPlayers() }
-            .filter { it.getPersonData().position == "FORWARD" }
+        teams.flatMap { it.players }
+            .filter { it.personData.position == PlayerPosition.FORWARD }
     val dataFrame = dataFrameOf(
-        "Transfer Cost" to forwards.map { it.getTransferData().cost.toFloat() },
-        "Goals Amount" to forwards.map { it.getStatisticsData().goals }
+        "Transfer Cost" to forwards.map { it.transferData.cost.toFloat() },
+        "Goals Amount" to forwards.map { it.statisticsData.goals }
     )
 
     dataFrame.plot {
