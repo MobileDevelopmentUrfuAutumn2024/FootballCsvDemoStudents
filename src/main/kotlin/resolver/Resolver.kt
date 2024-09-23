@@ -14,7 +14,6 @@ class Resolver(private val players: List<Player>):IResolver {
             .filter { it.position == Position.DEFENDER }
             .maxByOrNull { it.goalsCount }
 
-        
         return bestDefender?.let { it.name to it.goalsCount } ?: ("" to 0)
     }
 
