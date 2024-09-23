@@ -8,7 +8,7 @@ import parser.CsvParser
 import resolver.Resolver
 import java.io.File
 
-fun main(args: Array<String>) {
+fun main() {
     val players = CsvParser.parse("src/main/resources/fakePlayers.csv")
     val resolver = Resolver(players)
     val chartData = resolver.getTopTenTransferCostTeams()
