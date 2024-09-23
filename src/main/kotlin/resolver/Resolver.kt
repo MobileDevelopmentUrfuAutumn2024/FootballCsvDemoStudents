@@ -4,7 +4,6 @@ import model.Player
 import model.Team
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
-import org.jfree.chart.StandardChartTheme
 import org.jfree.chart.plot.CategoryPlot
 import org.jfree.chart.plot.PlotOrientation
 import org.jfree.data.category.DefaultCategoryDataset
