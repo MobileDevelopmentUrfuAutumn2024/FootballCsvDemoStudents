@@ -15,7 +15,4 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
-
-    //Покажите, какую долю от всех игроков занимают игроки каждой из позиций (защитник, нападающий и тд).
-    fun getPercentagePositionOfPlayers(): Map<String, Double>
 }
