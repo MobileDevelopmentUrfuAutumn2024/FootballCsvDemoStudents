@@ -2,53 +2,51 @@ package parser
 
 import model.Player
 import model.Position
+import model.Team
 import java.io.File
 import java.util.Scanner
 
-object CsvParser {
-    fun parsePlayers(path: String): List<Player> {
+object CsvParser{
+    private var players: MutableList<Player> = mutableListOf()
+
+    fun parse(path: String): List<Player> {
         val file = File(path)
         val scanner = Scanner(file)
+
         scanner.nextLine()
 
-        val players: MutableList<Player> = mutableListOf()
-
         while (scanner.hasNextLine()) {
-            players.add(parsePlayerLine(scanner.nextLine()))
+            parsePlayerFromString(scanner.nextLine())
         }
 
         return players
     }
 
-    private fun parsePlayerLine(str: String, delimiter: Char = ';'): Player {
-        val playerList = str.split(delimiter)
+    private fun parsePlayerFromString(playerString: String) {
+        val playerStringSplitted = playerString.split(";")
 
-        val name = playerList[0]
-        val teamName = playerList[1]
-        val city = playerList[2]
-        val position = playerList[3]
-        val nationality = playerList[4]
-        val agency = playerList[5].ifBlank { null }
-        val transferCost = playerList[6].toLong()
-        val participations = playerList[7].toInt()
-        val goals = playerList[8].toInt()
-        val assists = playerList[9].toInt()
-        val yellowCards = playerList[10].toInt()
-        val redCards = playerList[11].toInt()
-
-        return Player(
-            name,
-            teamName,
-            city,
-            Position.valueOf(position),
-            nationality,
-            agency,
-            transferCost,
-            participations,
-            goals,
-            assists,
-            yellowCards,
-            redCards
+        players.add(
+            Player(
+                name = playerStringSplitted[0],
+                team = Team(name = playerStringSplitted[1], city = playerStringSplitted[2]),
+                position = Position.valueOf(playerStringSplitted[3]),
+                nationality = playerStringSplitted[4],
+                agency = playerStringSplitted[5],
+                transferCost = playerStringSplitted[6].toLongOrDefault(),
+                participation = playerStringSplitted[7].toIntOrDefault(),
+                goals = playerStringSplitted[8].toIntOrDefault(),
+                assists = playerStringSplitted[9].toIntOrDefault(),
+                yellowCardsCount = playerStringSplitted[10].toIntOrDefault(),
+                redCardsCount = playerStringSplitted[11].toIntOrDefault()
+            )
         )
+    }
+
+    private fun String?.toLongOrDefault(default: Long = 0): Long {
+        return this?.toLongOrNull()?:default
+    }
+
+    private fun String?.toIntOrDefault(default: Int = 0): Int {
+        return this?.toIntOrNull()?:default
     }
 }

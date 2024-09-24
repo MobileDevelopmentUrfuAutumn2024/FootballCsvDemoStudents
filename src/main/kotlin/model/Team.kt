@@ -1,14 +1,7 @@
 package model
 
-class Team(
-    val teamName: String,
-    val players: List<Player>
-) {
-    fun getAverageRedCards(): Double {
-        return players.map { it.redCards }.average()
-    }
-
-    fun getTotalTransferCost(): Long {
-        return players.sumOf { it.transferCost }
+class Team(val name: String, val city: String){
+    override fun toString(): String {
+        return "Team(name='$name', city='$city')"
     }
 }

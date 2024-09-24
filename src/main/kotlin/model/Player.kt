@@ -2,22 +2,14 @@ package model
 
 class Player(
     val name: String,
-    val teamName: String,
-    val city: String,
+    val team: Team,
     val position: Position,
     val nationality: String,
     val agency: String?,
     val transferCost: Long,
-    val participations: Int,
+    val participation: Int,
     val goals: Int,
     val assists: Int,
-    val yellowCards: Int,
-    val redCards: Int,
+    val yellowCardsCount: Int,
+    val redCardsCount: Int,
 )
-
-enum class Position(val localization: String) {
-    DEFENDER("Защитник"),
-    GOALKEEPER("Вратарь"),
-    MIDFIELD("Полузащитник"),
-    FORWARD("Нападающий")
-}

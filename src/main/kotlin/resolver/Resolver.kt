@@ -1,59 +1,44 @@
 package resolver
 
-import chart.ChartManager
 import model.Player
 import model.Position
 import model.Team
-import java.io.File
-import java.nio.file.Paths
 
-
-class Resolver(private val players: List<Player>) : IResolver {
-
+class Resolver(val players: List<Player>) : IResolver{
     override fun getCountWithoutAgency(): Int {
-        return players.count { it.agency == null }
+        return players.count { it.agency.isNullOrBlank() }
     }
 
     override fun getBestScorerDefender(): Pair<String, Int> {
-        val bestDefenderByGoals = players
-            .filter { it.position == Position.DEFENDER }
-            .maxBy { it.goals }
+        val bestScorerDefender: Player = players.filter { it.position== Position.DEFENDER }
+            .maxByOrNull { it.goals } ?: throw Exception("Best scorer Defender has not defined")
+        return bestScorerDefender.let { Pair(it.name, it.goals) }
 
-        return Pair(bestDefenderByGoals.name, bestDefenderByGoals.goals)
     }
 
     override fun getTheExpensiveGermanPlayerPosition(): String {
-        return players
-            .filter { it.nationality == "Germany" }
-            .maxBy { it.transferCost }
-            .position.localization
+        val expensivePlayer = players.filter { it.nationality=="Germany" }
+            .maxByOrNull { it.transferCost } ?: throw Exception("The most expensive German player has not found")
+        return  expensivePlayer.let {
+            when (it.position) {
+                Position.DEFENDER -> "Защитник"
+                Position.MIDFIELD -> "Полузащитник"
+                Position.FORWARD -> "Нападающий"
+                Position.GOALKEEPER -> "Вратарь" }
+        }
     }
 
     override fun getTheRudestTeam(): Team {
-        val teams = players
-            .groupBy { it.teamName }
-            .map { (teamName, playersList) -> Team(teamName, playersList) }
-
-
-        return teams.maxBy { it.getAverageRedCards() }
+        val rudestTeam = players.groupBy { it.team }
+            .map { it -> Pair(it.key, it.value.sumOf { it.redCardsCount } / it.value.size) }
+            .maxByOrNull { it.second } ?: throw Exception("The rudest team has not found")
+        return rudestTeam.first
     }
 
-//    Вариант 2.
-//    Выведите топ-10 команд с наивысшей суммарной трансферной стоимостью с демонстрацией этих стоимостей.
-    fun topExpensiveTeams() {
-        val topExpensiveTeams = players
-            .groupBy { it.teamName }
-            .map { (teamName, playersList) -> Team(teamName, playersList) }
-            .sortedByDescending { it.getTotalTransferCost() }
-            .take(10)
-
-        val dataSet = ChartManager.createDataSet(topExpensiveTeams)
-        val chart = ChartManager.createBarChart(dataSet)
-
-        val file =
-            File("${Paths.get("").toAbsolutePath()}\\src\\main\\resources\\topTeamsChart.png")
-
-        ChartManager.saveChart(file, chart)
-        ChartManager.displayChart(chart)
+    override fun getPercentagePositionOfPlayers(): Map<String, Double> {
+        val countAllPlayers: Int = players.map { it.position }.count()
+        return players.groupBy { it.position.toString() }
+            .mapValues{ (_, value) -> value.count() / countAllPlayers.toDouble()}
     }
+
 }
