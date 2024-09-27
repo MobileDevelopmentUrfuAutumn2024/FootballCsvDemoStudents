@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.knowm.xchart:xchart:3.8.0")
 }
 
 tasks.test {
@@ -20,7 +20,7 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(17)
 }
 
 application {
