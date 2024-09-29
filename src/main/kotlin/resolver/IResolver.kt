@@ -1,6 +1,8 @@
 package resolver
 
+import model.Player
 import model.Team
+
 
 interface IResolver {
 
