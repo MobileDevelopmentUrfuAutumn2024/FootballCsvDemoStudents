@@ -1,5 +1,6 @@
 package resolver
 
+import model.Player
 import model.Team
 
 interface IResolver {
@@ -8,7 +9,7 @@ interface IResolver {
     fun getCountWithoutAgency(): Int
 
     // Выведите автора наибольшего числа голов из числа защитников и их количество.
-    fun getBestScorerDefender(): Pair<String, Int>
+    fun getBestScorerDefender(): List<Pair<String, Int>>
 
     // Выведите русское название позиции самого дорогого немецкого игрока.
     fun getTheExpensiveGermanPlayerPosition(): String
