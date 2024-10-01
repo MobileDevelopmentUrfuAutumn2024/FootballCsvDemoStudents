@@ -1,5 +1,6 @@
 package resolver
 
+import graph.model.TeamTransferTotalCost
 import model.Team
 
 interface IResolver {
@@ -15,4 +16,8 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
+
+    // Выведите топ-n команд с наивысшей суммарной трансферной стоимостью.
+    fun getTeamsTotalTransferCosts(topLimit: Int): List<TeamTransferTotalCost>
+
 }
