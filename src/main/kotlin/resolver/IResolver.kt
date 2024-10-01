@@ -1,5 +1,6 @@
 package resolver
 
+import model.ForwardFromTransferCost
 import model.Team
 
 interface IResolver {
@@ -15,4 +16,8 @@ interface IResolver {
 
     // Выберите команду с наибольшим числом удалений на одного игрока.
     fun getTheRudestTeam(): Team
+
+    /* Выберите список футболистов для демонстрации */
+    /* зависимости количества забитых голов от трансферной стоимости для нападающих */
+    fun getForwardFromTransferCost(): List<ForwardFromTransferCost>
 }
