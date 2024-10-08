@@ -1,3 +1,3 @@
 package resolver
 
-class Resolver
+class Resolver : IResolver
